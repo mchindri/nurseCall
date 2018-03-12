@@ -1,27 +1,33 @@
 from Tkinter import *
 import tkFont
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(40, GPIO.OUT)
-GPIO.output(40, GPIO.LOW)
+#GPIO.setmode(GPIO.BOARD)
+#GPIO.setup(40, GPIO.OUT)
+#GPIO.output(40, GPIO.LOW)
+
 
 win = Tk()
 
 myFont = tkFont.Font(family = 'Helvetica', size = 36, weight = 'bold')
 
+"""
 def ledON():
 	print("LED button pressed")
 	if GPIO.input(40) :
- 		GPIO.output(40,GPIO.LOW)
+		GPIO.output(40,GPIO.LOW)
 		ledButton["text"] = "LED ON"
 	else:
 		GPIO.output(40,GPIO.HIGH)
-                ledButton["text"] = "LED OFF"
+		ledButton["text"] = "LED OFF"
+"""
+
+def ledON():
+	print("LED button pressed")
 
 def exitProgram():
 	print("Exit Button pressed")
-        GPIO.cleanup()
+		#GPIO.cleanup()
 	win.quit()	
 
 
@@ -35,3 +41,4 @@ ledButton = Button(win, text = "LED ON", font = myFont, command = ledON, height 
 ledButton.pack()
 
 mainloop()
+
