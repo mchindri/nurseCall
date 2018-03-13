@@ -24,7 +24,7 @@ class InputButton(object):
 			self.status = self.OFF
 			return True
 
-	def activateSwitch(self):
+	def activateSwitch(self, pinReaded):
 		D.P("Button" + str(self.buttonID) + " activated")
 		self.status = self.ON
 
