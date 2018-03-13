@@ -1,19 +1,23 @@
-import keyboard
 import thread
+import time
+import debug as D
 
 class KeyChecker(object):
 	def __init__(self, buttons):
+		D.P("Creating Key Checker")
 		self.buttons = buttons
 		self.active = 0
 	def start(self):
+		D.P("Starting keychecker thread")
 		self.active = 1
 		try:
 			thread.start_new_thread(self.run, ())
 		except:
-			print("Running key checker fail")
+			D.P("Running key checker fail")
 	def stop(self):
 		self.active = 0
 	def run(self):
 		while self.active == 1:
 			for i in self.buttons:
 				i.read()
+			time.sleep(1.0)

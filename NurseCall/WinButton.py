@@ -1,4 +1,5 @@
 from InputButton import *
+import debug as d
 class WinButton(object):
 	def __init__(self, id, name, width, height, x_poz, y_poz, color):
 		self.winRef = None
@@ -23,11 +24,11 @@ class WinButton(object):
 			self.color = "green"
 
 	def read(self):
-		self.input.read()
+		#self.input.read()
 		if self.input.isPressed() == True:
 			self.winRef.configure(bg = "red")
 
 	def refresh(self):
-		print('Refresh pressed')
+		D.P("Refresh button " + str(self.name))
 		if self.winRef != None:
 			self.winRef.configure(bg = "green")
