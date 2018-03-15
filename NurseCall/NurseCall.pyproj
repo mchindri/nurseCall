@@ -23,6 +23,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="alarm.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="debug.py" />
     <Compile Include="Example.py" />
     <Compile Include="InputButton.py">
       <SubType>Code</SubType>
@@ -36,6 +40,7 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="relayCommand.py" />
     <Compile Include="WinButton.py">
       <SubType>Code</SubType>
     </Compile>
