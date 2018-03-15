@@ -10,7 +10,8 @@ class Interface():
 		self.win = Tk()
 		self.myFont = tkFont.Font(family = 'Helvetica', size = 20, weight = 'bold')
 		self.win.title("First GUI")
-		self.win.attributes('-fullscreen', True)
+		#self.win.attributes('-fullscreen', True)
+		self.win.geometry('800x400')
 		self.buttons = buttons
 		self.addButtons()
 		self.addDefaultButtons()

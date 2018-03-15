@@ -14,10 +14,11 @@ class KeyChecker(object):
 			thread.start_new_thread(self.run, ())
 		except:
 			D.P("Running key checker fail")
-	def stop(self):
-		self.active = 0
+	#def stop(self):
+	#	self.active = 0
 	def run(self):
 		while self.active == 1:
+			D.P("Key checker is working")
 			for i in self.buttons:
 				i.read()
 			time.sleep(1.0)

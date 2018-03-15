@@ -2,7 +2,7 @@ import logging, sys
 
 logging.basicConfig(strem = sys.stderr, level = logging.DEBUG)
 
-DEBUG = 0
+DEBUG = 1
 
 if DEBUG == 1:
 	def P(x):
