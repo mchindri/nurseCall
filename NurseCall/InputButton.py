@@ -1,6 +1,7 @@
 #import keyboard
 import RPi.GPIO as GPIO
 import debug as D
+import threading
 
 
 
@@ -14,6 +15,7 @@ class InputButton(object):
 		self.buttonID = id
 		self.inputPin = id
 		self.status = self.OFF
+		self.activeEv = threading.Event()
 		if id != -1:
 			GPIO.setup(self.inputPin, GPIO.IN)
 			self.addEvent()
@@ -28,11 +30,15 @@ class InputButton(object):
 	def activateSwitch(self, pinReaded):
 		D.P("Button" + str(self.buttonID) + " activated")
 		self.status = self.ON
+		self.activeEv.set()
 
 	def addEvent(self):
 		D.P("Setting callback for button " + str(self.buttonID))
 		GPIO.add_event_detect(self.buttonID, GPIO.RISING,
 								callback = self.activateSwitch) 
+
+	def getActiveEv(self):
+		return self.activeEv
 
 '''
 	#for GPIO

@@ -10,8 +10,11 @@ def main():
 	D.P("Program started")
 	setButtons()
 	myInterface = Interface(buttons)
-	KeyChecker(buttons).start()
+	kc = KeyChecker(buttons)
+	kc.start()
 	myInterface.start()
+
+	kc.stop()
 	relayCommand.close()
 	print("Main ended")
 
