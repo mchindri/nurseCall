@@ -1,3 +1,3 @@
 #!/bin/bash
-sleep 5s
-lxterminal -e python ~/Desktop/nurseCall/NurseCall/main.py
+sleep 10s
+python ~/Desktop/nurseCall/NurseCall/main.py
