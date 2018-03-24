@@ -1,4 +1,5 @@
 from InputButton import *
+from Blinker import *
 import debug as d
 import relayCommand
 import alarm
@@ -15,37 +16,23 @@ class WinButton(object):
 		self.x_poz = x_poz
 		self.y_poz = y_poz
 		self.color = color
-		self.input = InputButton(self.id)
+		self.input = InputButton(self.id, self.activationCallback)
 
-	def addReference(self, winRef):
+	def addReferences(self, win, winRef, alarm):
 		self.winRef = winRef
+		self.blinker = Blinker(win, self.winRef, self.color)
+		self.alarm = alarm
 
-	def changeColor(self):
-		if self.color == "green":
-			self.color = "red"
-		else:
-			self.color = "green"
-
-
-	def read(self):
-		#self.input.read()
-		if self.id != -1:
-			if self.input.isPressed() == True:
-				alarm.setAlarm()
-				self.winRef.configure(bg = "red", activebackground = "red")
-				relayCommand.setRelay(self.relayId)
-		elif alarm.isAlarmActive() == True:
-			self.winRef.configure(bg = "red", activebackground = "red")
-			if alarm.isAlarmRunning() == False:
-				relayCommand.setRelay(self.relayId)
-				alarm.runAlarm()
-			
-				
-
+	def activationCallback(self):
+		D.P("Button pressed")
+		if self.input.isSet() == False:
+			relayCommand.setRelay(self.relayId)
+			self.input.set()
+			self.blinker.start()
+		self.alarm.set()
+	
 	def refresh(self):
 		D.P("Refresh button " + str(self.name))
-		if self.winRef != None:
-			self.winRef.configure(bg = "green", activebackground = "green")
-			relayCommand.unsetRelay(self.relayId)
-			if self.id == -1:
-				alarm.stopAlarm()
+		relayCommand.unsetRelay(self.relayId)
+		self.blinker.stop()
+		self.input.unSet()

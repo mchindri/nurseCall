@@ -6,7 +6,7 @@ import time
 import debug as D
 
 class Interface():
-	def __init__(self, buttons):
+	def __init__(self, buttons, alarm):
 		D.P("Creating interface")
 		self.win = Tk()
 		self.myFont = tkFont.Font(family = 'Helvetica', size = 10, weight = 'bold')
@@ -14,6 +14,8 @@ class Interface():
 		self.win.attributes('-fullscreen', True)
 		#self.win.geometry('800x400')
 		self.buttons = buttons
+		self.alarm = alarm
+		self.alarm.draw(self.win, self.myFont)
 		self.addButtons()
 		self.addDefaultButtons()
 		self.addClock()
@@ -47,7 +49,7 @@ class Interface():
 				command = i.command,
 				bg = i.color,
 				activebackground = i.color)
-			i.addReference(but)
+			i.addReferences(self.win, but, self.alarm)
 			but.pack()
 			but.place(x = i.x_poz, y = i.y_poz, height = i.height, width = i.width)		
 	def exit(self):

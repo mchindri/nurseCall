@@ -11,34 +11,34 @@ class InputButton(object):
 	ON = 1
 	GPIO.setmode(GPIO.BCM)
 
-	def __init__(self, id):
+	def __init__(self, id, activationCallback):
+		self.activationCallback = activationCallback
 		self.buttonID = id
 		self.inputPin = id
 		self.status = self.OFF
-		self.activeEv = threading.Event()
-		if id != -1:
-			GPIO.setup(self.inputPin, GPIO.IN)
-			self.addEvent()
+		GPIO.setup(self.inputPin, GPIO.IN)
+		self.addEvent()
 
-	def isPressed(self):
+	def isSet(self):
 		if self.status == self.OFF:
 			return False
 		else:
-			self.status = self.OFF
 			return True
+
+	def set(self):
+		self.status = self.ON
+
+	def unSet(self):
+		self.status = self.OFF
 
 	def activateSwitch(self, pinReaded):
 		D.P("Button" + str(self.buttonID) + " activated")
-		self.status = self.ON
-		self.activeEv.set()
+		self.activationCallback()
 
 	def addEvent(self):
 		D.P("Setting callback for button " + str(self.buttonID))
 		GPIO.add_event_detect(self.buttonID, GPIO.RISING,
 								callback = self.activateSwitch) 
-
-	def getActiveEv(self):
-		return self.activeEv
 
 '''
 	#for GPIO

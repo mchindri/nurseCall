@@ -1,6 +1,6 @@
 from Interface import *
 from WinButton import *
-from KeyChecker import *
+from Alarm import *
 import relayCommand
 import debug as D
 import time
@@ -10,15 +10,15 @@ buttons = []
 def main():
 	D.P("Program started")
 	relayCommand.closeAll()
-	setButtons()
-	myInterface = Interface(buttons)
-	kc = KeyChecker(buttons)
-	kc.start()
+	setButtons()	
+	
+	alarm = Alarm()
+	myInterface = Interface(buttons, alarm)
 	myInterface.start()
 
-	kc.stop()
 	relayCommand.close()
 	D.P("Main ended")
+
 
 def setButtons():
     
@@ -40,7 +40,6 @@ def setButtons():
 	buttons.append(WinButton(id = 26, relayId = 12, name = "DORMITOR 9", width = 120, height = 120, x_poz = 675, y_poz = 355, color = "green"))
 	buttons.append(WinButton(id = 27, relayId = 13, name = "DORMITOR 10", width = 120, height = 120, x_poz = 553, y_poz = 355, color = "green"))
 	buttons.append(WinButton(id = 28, relayId = 14, name = "BAIE 5", width = 70, height = 70, x_poz = 580, y_poz = 220, color = "green"))
-	buttons.append(WinButton(id = -1, relayId = 15, name = "Stop\nAlarm", width = 100, height = 70, x_poz = 370, y_poz = 355, color = "green"))
 
 if __name__ == "__main__":
 	main()
