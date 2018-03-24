@@ -4,6 +4,7 @@ import tkFont
 import thread
 import time
 import debug as D
+import Synchronizer
 
 class Interface():
 	def __init__(self, buttons, alarm):
@@ -13,12 +14,14 @@ class Interface():
 		self.win.title("First GUI")
 		self.win.attributes('-fullscreen', True)
 		#self.win.geometry('800x400')
+		self.blinkers = []
 		self.buttons = buttons
 		self.alarm = alarm
 		self.alarm.draw(self.win, self.myFont)
 		self.addButtons()
 		self.addDefaultButtons()
 		self.addClock()
+		Synchronizer.init(self.win, self.blinkers, alarm.blinker)
 	def __del__(self):
 		D.P("Deleting Interface")
 		self.win.quit()
@@ -50,6 +53,7 @@ class Interface():
 				bg = i.color,
 				activebackground = i.color)
 			i.addReferences(self.win, but, self.alarm)
+			self.blinkers.append(i.blinker)
 			but.pack()
 			but.place(x = i.x_poz, y = i.y_poz, height = i.height, width = i.width)		
 	def exit(self):
