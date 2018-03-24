@@ -32,10 +32,10 @@ class WinButton(object):
 		if self.id != -1:
 			if self.input.isPressed() == True:
 				alarm.setAlarm()
-				self.winRef.configure(bg = "red")
+				self.winRef.configure(bg = "red", activebackground = "red")
 				relayCommand.setRelay(self.relayId)
 		elif alarm.isAlarmActive() == True:
-			self.winRef.configure(bg = "red")
+			self.winRef.configure(bg = "red", activebackground = "red")
 			if alarm.isAlarmRunning() == False:
 				relayCommand.setRelay(self.relayId)
 				alarm.runAlarm()
@@ -45,7 +45,7 @@ class WinButton(object):
 	def refresh(self):
 		D.P("Refresh button " + str(self.name))
 		if self.winRef != None:
-			self.winRef.configure(bg = "green")
+			self.winRef.configure(bg = "green", activebackground = "green")
 			relayCommand.unsetRelay(self.relayId)
 			if self.id == -1:
 				alarm.stopAlarm()

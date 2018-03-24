@@ -18,7 +18,7 @@ def main():
 
 	kc.stop()
 	relayCommand.close()
-	print("Main ended")
+	D.P("Main ended")
 
 def setButtons():
     

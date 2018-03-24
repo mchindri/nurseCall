@@ -1,6 +1,7 @@
 import serial
 import debug as D 
 
+#serPort = serial.Serial('/dev/ttyUSB0', 19200, timeout=1)
 serPort = serial.Serial('/dev/ttyACM0', 19200, timeout=1)
 
 def getId(id):

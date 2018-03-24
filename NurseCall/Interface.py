@@ -58,7 +58,7 @@ class Interface():
 
 	def addDefaultButtons(self):
 		#exit button
-		but = Button(self.win, text="Exit", font=self.myFont, command = self.exit, bg = "Blue")
+		but = Button(self.win, text="Exit", font=self.myFont, command = self.exit, bg = "Blue", activebackground = "Blue")
 		but.pack()
 		but.place(x = 10, y = 10, height = 40, width = 40)
 
